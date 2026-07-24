@@ -6,6 +6,8 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 # Kafka
 KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
 KAFKA_TOPIC = "commerce-events"
+KAFKA_NUM_PARTITIONS = 3
 
+KAFKA_REPLICATION_FACTOR = 1
 # Simulator
 EVENT_DELAY_SECONDS = 1

@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 import random
-# pyrefly: ignore [missing-import]
 from faker import Faker
 
 from src.ingestion.schemas.event import DeviceType
