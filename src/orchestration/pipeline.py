@@ -31,6 +31,8 @@ class StreamingPipeline:
 
         parsed_df = EventParser.parse(raw_df)
 
+        
+
         print("Writing to Bronze layer...")
 
         writer = BronzeWriter()

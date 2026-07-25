@@ -1,3 +1,5 @@
+
+from pyspark.sql.types import TimestampType
 from pyspark.sql import DataFrame
 from pyspark.sql.functions import col, from_json
 from pyspark.sql.types import (
@@ -6,6 +8,7 @@ from pyspark.sql.types import (
     StringType,
     DoubleType,
     IntegerType,
+    BooleanType,
 )
 
 
@@ -22,21 +25,40 @@ class EventParser:
         """
 
         return StructType([
-            StructField("event_id", StringType(), True),
-            StructField("timestamp", StringType(), True),
-            StructField("event_type", StringType(), True),
+        StructField("event_id", StringType(), True),
 
-            StructField("user_id", StringType(), True),
-            StructField("session_id", StringType(), True),
+        StructField("event_type", StringType(), True),
 
-            StructField("product_id", StringType(), True),
-            StructField("category", StringType(), True),
+        StructField("event_timestamp", TimestampType(), True),
 
-            StructField("price", DoubleType(), True),
-            StructField("quantity", IntegerType(), True),
+        StructField("ingestion_timestamp", TimestampType(), True),
 
-            StructField("payment_method", StringType(), True),
-        ])
+        StructField("user_id", IntegerType(), True),
+
+        StructField("session_id", StringType(), True),
+
+        StructField("product_id", IntegerType(), True),
+
+        StructField("category", StringType(), True),
+
+        StructField("quantity", IntegerType(), True),
+
+        StructField("unit_price", DoubleType(), True),
+
+        StructField("payment_method", StringType(), True),
+
+        StructField("country", StringType(), True),
+
+        StructField("city", StringType(), True),
+
+        StructField("device", StringType(), True),
+
+        StructField("platform", StringType(), True),
+
+        StructField("event_source", StringType(), True),
+
+        StructField("is_member", BooleanType(), True),
+    ])
 
     @classmethod
     def parse(cls, kafka_df: DataFrame) -> DataFrame:

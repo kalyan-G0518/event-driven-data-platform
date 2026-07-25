@@ -29,13 +29,14 @@ class KafkaProducer:
     def send(self, event):
         payload = event.model_dump(mode="json")
 
+        print(json.dumps(payload, indent=2))   # <-- add this
+
         self.producer.produce(
             topic=KAFKA_TOPIC,
             value=json.dumps(payload),
             callback=self._delivery_report,
         )
-
-        # Trigger callbacks
+        
         self.producer.poll(0)
 
     def flush(self):
