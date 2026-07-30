@@ -1,0 +1,3 @@
+v1
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00001-e74b2a28-b159-4b9d-8114-ce50c1628a64-c000.snappy.parquet","timestamp":1785448710106,"batchId":3}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-9bdfbf67-caae-459c-823b-e8ab3f0bd3c6-c000.snappy.parquet","timestamp":1785448710111,"batchId":3}

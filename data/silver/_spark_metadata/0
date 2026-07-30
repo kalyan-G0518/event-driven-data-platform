@@ -1,0 +1,6 @@
+v1
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/silver/part-00000-f70abb5d-208e-46b1-9a91-60dc901ab1ce-c000.snappy.parquet","size":5686,"isDir":false,"modificationTime":1785425063470,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/silver/part-00001-057127d6-0ee4-4f0a-968a-bb4e591eb686-c000.snappy.parquet","size":5624,"isDir":false,"modificationTime":1785425063470,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/silver/part-00002-8a6a09c4-d4c2-4fd4-b170-4c8c14874185-c000.snappy.parquet","size":5618,"isDir":false,"modificationTime":1785425063470,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/silver/part-00003-1f287a37-fac4-4a0c-8ca4-f29f10d269f8-c000.snappy.parquet","size":5455,"isDir":false,"modificationTime":1785425063470,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/silver/part-00004-e87c2d00-00ff-461a-8c57-e361f0de8621-c000.snappy.parquet","size":5177,"isDir":false,"modificationTime":1785425063479,"blockReplication":1,"blockSize":33554432,"action":"add"}

@@ -2,6 +2,7 @@
 from pyspark.sql.types import TimestampType
 from pyspark.sql import DataFrame
 from pyspark.sql.functions import col, from_json
+from src.common.commerce_schema import COMMERCE_EVENT_SCHEMA
 from pyspark.sql.types import (
     StructType,
     StructField,
@@ -73,7 +74,7 @@ class EventParser:
             .select(
                 from_json(
                     col("json"),
-                    cls.schema()
+                    COMMERCE_EVENT_SCHEMA
                 ).alias("data")
             )
             .select("data.*")
