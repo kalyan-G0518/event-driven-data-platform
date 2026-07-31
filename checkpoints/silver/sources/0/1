@@ -1,4 +1,3 @@
 v1
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-d817c708-7f64-4531-aaf9-5b8a3431bec8-c000.snappy.parquet","timestamp":1785425096385,"batchId":1}
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00001-ae17b9e6-9375-4d70-a517-953cd0801b9c-c000.snappy.parquet","timestamp":1785425096402,"batchId":1}
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00002-3fbe354e-cc25-439c-b2a5-3d7a22bb8faf-c000.snappy.parquet","timestamp":1785425096404,"batchId":1}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-6fa07bb9-968b-47cc-920a-ce4026cc372b-c000.snappy.parquet","timestamp":1785465056935,"batchId":1}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00001-6819339d-61a8-47e4-854f-6653d4b1be43-c000.snappy.parquet","timestamp":1785465056935,"batchId":1}

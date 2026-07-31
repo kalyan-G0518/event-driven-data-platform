@@ -1,7 +1,2 @@
 v1
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-8cc60e5f-dc26-413c-b275-4ca85439e3f4-c000.snappy.parquet","timestamp":1785014128205,"batchId":0}
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-5ef743db-07cb-4be5-bc7f-61cacc17bc6e-c000.snappy.parquet","timestamp":1785014132625,"batchId":0}
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00001-d99e46b6-a627-4ac5-86bc-b080127edb98-c000.snappy.parquet","timestamp":1785014132625,"batchId":0}
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-c4e94607-40af-4639-a45d-6008210dabe8-c000.snappy.parquet","timestamp":1785425035795,"batchId":0}
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00001-66da09d5-7610-41ae-860b-d6f0fbc8241b-c000.snappy.parquet","timestamp":1785425035795,"batchId":0}
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00002-b9f211b2-8168-4217-aa5e-9b3c72661a62-c000.snappy.parquet","timestamp":1785425035797,"batchId":0}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-ac46f73b-e1cd-459b-81bc-0045f58dbe3b-c000.snappy.parquet","timestamp":1785464890762,"batchId":0}
