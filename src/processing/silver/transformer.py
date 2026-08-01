@@ -1,5 +1,13 @@
 from pyspark.sql import DataFrame
-from pyspark.sql.functions import col, to_date, hour
+from pyspark.sql.functions import (
+    col,
+    to_date,
+    hour,
+    lower,
+    upper,
+    initcap,
+    when,
+)
 
 
 class SilverTransformer:
@@ -9,18 +17,33 @@ class SilverTransformer:
         """
         Apply Silver-layer transformations.
 
-        Current transformations:
-        - Add event_date
-        - Add event_hour
-        - Add total_amount
+        Transformations:
+        - Derived columns
+        - Data normalization
         """
 
         return (
             df
+
+            # ------------------------
+            # Derived Columns
+            # ------------------------
             .withColumn("event_date", to_date(col("event_timestamp")))
             .withColumn("event_hour", hour(col("event_timestamp")))
+            .withColumn("total_amount", col("quantity") * col("unit_price"))
             .withColumn(
-                "total_amount",
-                col("quantity") * col("unit_price")
+                "is_purchase",
+                when(col("event_type") == "purchase", True).otherwise(False)
             )
+
+            # ------------------------
+            # Normalization
+            # ------------------------
+            .withColumn("country", upper(col("country")))
+            .withColumn("city", initcap(col("city")))
+            .withColumn("device", lower(col("device")))
+            .withColumn("platform", lower(col("platform")))
+            .withColumn("category", lower(col("category")))
+            .withColumn("event_source", lower(col("event_source")))
+            .withColumn("event_type", lower(col("event_type")))
         )

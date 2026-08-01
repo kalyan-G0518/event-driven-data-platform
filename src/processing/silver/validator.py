@@ -7,21 +7,30 @@ class SilverValidator:
     @staticmethod
     def validate(df: DataFrame) -> DataFrame:
         """
-        Apply Silver-layer data quality validation.
+        Silver-layer validation.
 
-        Current validations:
-        - quantity > 0
-        - unit_price >= 0
-        - event_id is not null
-        - user_id is not null
-        - session_id is not null
+        Rules:
+        - Required IDs must exist
+        - Quantity must be positive
+        - Price cannot be negative
+        - Purchase events require payment_method
         """
+
+        valid_record = (
+            (col("quantity") > 0)
+            & (col("unit_price") >= 0)
+            & col("event_id").isNotNull()
+            & col("user_id").isNotNull()
+            & col("session_id").isNotNull()
+        )
+
+        purchase_rule = (
+            (col("event_type") != "purchase")
+            | col("payment_method").isNotNull()
+        )
 
         return (
             df
-            .filter(col("quantity") > 0)
-            .filter(col("unit_price") >= 0)
-            .filter(col("event_id").isNotNull())
-            .filter(col("user_id").isNotNull())
-            .filter(col("session_id").isNotNull())
+            .filter(valid_record & purchase_rule)
+            .dropDuplicates(["event_id"])
         )
