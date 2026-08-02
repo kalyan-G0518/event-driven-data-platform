@@ -1,4 +1,6 @@
+
 from pyspark.sql import SparkSession, DataFrame
+from pyspark.sql import functions as F
 from pyspark.sql.functions import (
     col,
     lit,
@@ -12,6 +14,7 @@ from pyspark.sql.functions import (
     current_timestamp,
     rand,
 )
+
 from pyspark.sql.types import IntegerType
 
 
@@ -45,7 +48,8 @@ class ProductMasterBuilder:
             .option("escape", "\"")
             .csv(self.input_path)
         )
-
+        print("Distinct categories in source dataset:")
+        self.df.select("category").distinct().show(200, truncate=False)
         return self
 
     # --------------------------------------------------
@@ -95,6 +99,60 @@ class ProductMasterBuilder:
     # --------------------------------------------------
 
     def enrich(self):
+        self.df = self.df.withColumn(
+        "subcategory",
+        col("category")
+    )
+        self.df = self.df.withColumn(
+        "category",
+        when(
+            F.lower(col("subcategory")).isin(
+                "shirts",
+                "tops",
+                "tshirts",
+                "watches",
+                "formal-shoes",
+                "casual-shoes",
+                "sherwani",
+                "jeans",
+                "dresses"
+            ),
+            "fashion"
+        )
+        .when(
+            F.lower(col("subcategory")).isin(
+                "laptops",
+                "mobiles",
+                "smartphones",
+                "headphones",
+                "electronics"
+            ),
+            "electronics"
+        )
+        .when(
+            F.lower(col("subcategory")).isin(
+                "beauty",
+                "makeup",
+                "skin-care"
+            ),
+            "beauty"
+        )
+        .when(
+            F.lower(col("subcategory")).isin(
+                "sports",
+                "fitness"
+            ),
+            "sports"
+        )
+        .when(
+            F.lower(col("subcategory")).isin(
+                "grocery",
+                "groceries"
+            ),
+            "grocery"
+        )
+        .otherwise("home")
+    )
 
         # SKU
 
@@ -229,13 +287,12 @@ class ProductMasterBuilder:
     # --------------------------------------------------
 
     def export(self):
+        print(">>> WRITING PRODUCT MASTER AS PARQUET <<<")
 
         (
-            self.df
-            .write
+            self.df.write
             .mode("overwrite")
-            .option("header", True)
-            .csv(self.output_path)
+            .parquet(self.output_path)
         )
 
         return self

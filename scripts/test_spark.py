@@ -1,15 +1,39 @@
-from src.processing.streaming.spark_session import SparkSessionBuilder
+from pyspark.sql import SparkSession
 
-print("1. Starting program")
+spark = (
+    SparkSession.builder
+    .master("local[*]")
+    .appName("Test")
+    .getOrCreate()
+)
 
-print("2. Creating Spark session...")
-spark = SparkSessionBuilder.create()
+print("Spark started!")
 
-print("3. Spark session created!")
+df = spark.read.parquet("data/silver")
 
-print("Spark Version:", spark.version)
+print(df.count())
 
-print("4. Stopping Spark...")
+
+
+from pyspark.sql.functions import count, sum, when, col
+
+gold = (
+    df
+    .groupBy("event_date")
+    .agg(
+        count("*").alias("total_events"),
+        count(
+            when(
+                col("event_type") == "purchase",
+                True
+            )
+        ).alias("total_orders"),
+        sum("total_amount").alias("gross_revenue")
+    )
+)
+
+gold.write.mode("overwrite").parquet("data/gold_test")
+
+print("SUCCESS")
+
 spark.stop()
-
-print("5. Finished")

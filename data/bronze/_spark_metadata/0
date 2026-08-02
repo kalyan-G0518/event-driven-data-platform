@@ -1,2 +1,2 @@
 v1
-{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-89e8796a-439e-479e-8af1-6705fc0e654a-c000.snappy.parquet","size":1785,"isDir":false,"modificationTime":1785466982913,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///C:/Users/kalya/event-driven-data-platform/data/bronze/part-00000-0f624b6d-b2ae-48f3-96fa-cf36710d9190-c000.snappy.parquet","size":1785,"isDir":false,"modificationTime":1785629143509,"blockReplication":1,"blockSize":33554432,"action":"add"}

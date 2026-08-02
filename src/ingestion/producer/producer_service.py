@@ -4,10 +4,6 @@ import time
 
 from src.config.settings import EVENT_DELAY_SECONDS
 
-from src.ingestion.catalog.product_catalog import (
-    ProductCatalog,
-)
-
 from src.ingestion.producer.kafka_producer import (
     KafkaProducer,
 )
@@ -16,8 +12,8 @@ from src.ingestion.producer.topic_manager import (
     TopicManager,
 )
 
-from src.ingestion.simulator.generator import (
-    generate_session,
+from src.business_engine.simulation.business_simulator import (
+    BusinessSimulator,
 )
 
 logger = logging.getLogger(__name__)
@@ -35,19 +31,11 @@ class ProducerService:
 
         self.producer = KafkaProducer()
 
-        self.catalog = ProductCatalog()
+        self.simulator = BusinessSimulator()
 
     def publish_session(self):
 
-        user_id = random.randint(
-            100000,
-            999999,
-        )
-
-        events = generate_session(
-            user_id,
-            self.catalog,
-        )
+        events = self.simulator.generate_session()
 
         logger.info(
             "Publishing session with %d events.",
