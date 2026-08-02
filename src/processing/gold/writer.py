@@ -11,17 +11,18 @@ class GoldWriter:
 
     def write(
         self,
-        df: DataFrame
+        datasets: dict[str, DataFrame]
     ):
 
-        (
+        for dataset_name, df in datasets.items():
 
-            df
+            (
+                df
+                .write
+                .mode("overwrite")
+                .parquet(
+                    f"{self.output_path}/{dataset_name}"
+                )
+            )
 
-            .write
-
-            .mode("overwrite")
-
-            .parquet(self.output_path)
-
-        )
+            print(f"✓ Written {dataset_name}")

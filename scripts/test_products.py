@@ -1,4 +1,19 @@
-from src.ingestion.simulator.products import get_random_product
+from pyspark.sql import SparkSession
 
-for _ in range(5):
-    print(get_random_product())
+spark = (
+    SparkSession.builder
+    .appName("Test Product Master")
+    .getOrCreate()
+)
+
+df = spark.read.parquet("data/master/products")
+
+print("\n===== SCHEMA =====")
+df.printSchema()
+
+print("\n===== COLUMNS =====")
+print(df.columns)
+
+
+
+spark.stop()

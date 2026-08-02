@@ -1,43 +1,25 @@
 from pyspark.sql import DataFrame
-from pyspark.sql.functions import (
-    col,
-    count,
-    sum,
-    when,
-)
 
+from src.processing.gold.executive import ExecutiveAnalytics
+from src.processing.gold.sales import SalesAnalytics
 
 class GoldAggregator:
+    """
+    Orchestrates all Gold analytics
+    data marts.
+    """
 
     @staticmethod
-    def aggregate(df: DataFrame) -> DataFrame:
-        """
-        Generate business metrics
-        from Silver events.
-        """
+    def aggregate(df: DataFrame) -> dict[str, DataFrame]:
 
-        return (
+        gold_datasets = {}
 
-            df
-
-            .groupBy(
-                "event_date"
-            )
-
-            .agg(
-
-                count("*").alias("total_events"),
-
-                count(
-                    when(
-                        col("event_type") == "purchase",
-                        True
-                    )
-                ).alias("total_orders"),
-
-                sum("total_amount")
-                .alias("gross_revenue")
-
-            )
-
+        # Executive Summary
+        gold_datasets["executive_summary"] = (
+            ExecutiveAnalytics.build(df)
         )
+        gold_datasets["sales_summary"] = (
+    SalesAnalytics.build(df)
+)
+
+        return gold_datasets

@@ -63,6 +63,8 @@ class ProductMasterBuilder:
             .dropDuplicates(["product_id"])
             .dropna(subset=["title", "final_price", "category"])
         )
+        self.df.select("product_id").show(20, truncate=False)
+        
 
         return self
 
@@ -81,7 +83,10 @@ class ProductMasterBuilder:
             .withColumnRenamed("rating", "average_rating")
             .withColumnRenamed("ratings_count", "review_count")
             .withColumnRenamed("seller_name", "supplier_name")
-
+            .withColumn(
+    "product_id",
+    col("product_id").cast("int")
+)
             .withColumn(
                 "product_name",
                 regexp_replace(
@@ -91,6 +96,8 @@ class ProductMasterBuilder:
                 )
             )
         )
+        print("\n===== AFTER STANDARDIZE =====")
+        self.df.printSchema()
 
         return self
 
@@ -279,6 +286,9 @@ class ProductMasterBuilder:
             "created_at",
             current_timestamp()
         )
+        print("\n===== AFTER ENRICH ====")
+        self.df.printSchema()
+        self.df.show(5)
 
         return self
 
