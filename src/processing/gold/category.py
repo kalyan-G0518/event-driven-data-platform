@@ -6,26 +6,26 @@ from pyspark.sql.functions import (
 )
 
 
-class GeographyAnalytics:
+class CategoryAnalytics:
     """
-    Builds geographic customer analytics.
+    Builds category-level business analytics
+    from Product Performance.
     """
 
     @staticmethod
-    def build(customer_metrics: DataFrame) -> DataFrame:
+    def build(product_performance: DataFrame) -> DataFrame:
 
         return (
-            customer_metrics
+            product_performance
 
             .groupBy(
-                "country",
-                "city"
+                "category"
             )
 
             .agg(
 
                 count("*").alias(
-                    "customer_count"
+                    "product_count"
                 ),
 
                 sum("total_events").alias(
@@ -36,16 +36,20 @@ class GeographyAnalytics:
                     "purchase_events"
                 ),
 
-                sum("total_quantity").alias(
-                    "total_quantity"
+                sum("units_sold").alias(
+                    "units_sold"
                 ),
 
                 sum("total_revenue").alias(
                     "total_revenue"
                 ),
 
-                avg("average_order_value").alias(
-                    "average_order_value"
+                avg("average_selling_price").alias(
+                    "average_selling_price"
+                ),
+
+                sum("inventory_value").alias(
+                    "inventory_value"
                 )
             )
         )
